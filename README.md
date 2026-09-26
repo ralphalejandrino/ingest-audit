@@ -72,3 +72,21 @@ A jobs index where 99.8% of rows are over a month old and none are under a week 
 - 6 concurrent requests against a Cloudflare-cached static site, one pass.
 
 Measured 2026-09-26.
+
+---
+
+## Portfolio-wide run (added after the assessment window)
+
+The submission noted this as unfinished. Running the same script across all three properties, same day, same `--today`:
+
+| Property | Pages | Median page | Heaviest page | Heaviest ÷ median |
+|---|---:|---:|---:|---:|
+| `ctaio.dev` | 422 | 59 KB | **26.6 MB** (`/en/jobs/`) | **462×** |
+| `prommer.net` | 474 | 279 KB | 358 KB | 1× |
+| `wetheflywheel.com` | 306 | 56 KB | 208 KB | 4× |
+
+**1,202 pages measured, 0 failures — and `/en/jobs/` is the only page anywhere near pathological.** The other two properties have no outlier: `prommer.net`'s heaviest page is barely above its own median, and `wetheflywheel.com`'s tops out at 208 KB.
+
+That matters more than a list of offenders would. It means the 26.6 MB is not a house pattern or a framework artifact — it is one un-expired table in one tree, and 8 of the 10 heaviest pages on `ctaio.dev` sit in that same tree.
+
+One incidental observation: `prommer.net` carries a **279 KB median**, roughly five times `ctaio.dev`'s and `wetheflywheel.com`'s. Nothing is broken there — it is uniformly heavy rather than spiked, which is a different question (shared page furniture) and a much smaller one.
